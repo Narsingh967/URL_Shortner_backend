@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Basically used for shortning the long string url",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "nodemon index",
     "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/Narsingh967/URL_Shortner/issues"
   },
-  "homepage": "https://github.com/Narsingh967/URL_Shortner#readme"
+  "homepage": "https://github.com/Narsingh967/URL_Shortner#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "nanoid": "^5.1.5",
+    "nodemon": "^3.1.10"
+  }
 }
