@@ -39,7 +39,12 @@ app.post('/api/short',async(req,res)=>{
         const url=new Url({originalUrl,shortUrl})
 
         await url.save();
-        return res.status(200).json({message:"URL Generated",url:url})
+        return res.status(200).json({message:"URL Generated",
+        url: {
+        shortUrl: `http://localhost:3000/${shortUrl}`,
+        originalUrl
+        }
+        })
 
     }
 
@@ -52,7 +57,7 @@ app.post('/api/short',async(req,res)=>{
 
 //Api for fetching the sort url
 
-app.get("/shortUrl",async(req,res)=>{
+app.get("/:shortUrl",async(req,res)=>{
     try{
         const {shortUrl}=req.params;
 
