@@ -55,12 +55,17 @@ app.post('/api/short',async(req,res)=>{
 app.get("/shortUrl",async(req,res)=>{
     try{
         const {shortUrl}=req.params;
-        if(!shortUrl){
-            return res.status(400).json({message:"Original string is null"})
-        }
 
         const url=await Url.findOne({shortUrl});
-        return res.status(200).json({message:"Sorted Url:",url:url})
+        if(url){
+            url.clicks++;
+            await url.save();
+            return res.redirect(url.originalUrl)
+        }
+
+        else{
+            return res.status(400).json({message:"Original string is null"})
+        }
     }
 
     catch(error){
