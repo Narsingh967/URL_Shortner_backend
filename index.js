@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import { nanoid } from 'nanoid';
 import dotenv from 'dotenv';
+import QRCode from 'qrcode';
+
 dotenv.config();
 
 const app=express();
@@ -35,14 +37,21 @@ app.post('/api/short',async(req,res)=>{
             return res.status(400).json({message:"originalUrl is required"})
         }
 
+        //For Generating the short URL
         const shortUrl=nanoid(8)
         const url=new Url({originalUrl,shortUrl})
+
+        //Generating QR
+        const fullShortUrl=`http://localhost:3000/${shortUrl}`
+        const qrCode = await QRCode.toDataURL(fullShortUrl)
+
 
         await url.save();
         return res.status(200).json({message:"URL Generated",
         url: {
         shortUrl: `http://localhost:3000/${shortUrl}`,
-        originalUrl
+        originalUrl,
+        qrCode
         }
         })
 
