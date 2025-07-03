@@ -42,14 +42,14 @@ app.post('/api/short',async(req,res)=>{
         const url=new Url({originalUrl,shortUrl})
 
         //Generating QR
-        const fullShortUrl=`http://localhost:3000/${shortUrl}`
+        const fullShortUrl=`https://url-shortner-backend-xner.onrender.com/${shortUrl}`
         const qrCode = await QRCode.toDataURL(fullShortUrl)
 
 
         await url.save();
         return res.status(200).json({message:"URL Generated",
         url: {
-        shortUrl: `http://localhost:3000/${shortUrl}`,
+        shortUrl: `https://url-shortner-backend-xner.onrender.com/${shortUrl}`,
         originalUrl,
         qrCode
         }
